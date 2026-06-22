@@ -7,28 +7,45 @@ import card_services from "./components/card";
 
 function App() {
   return (
-    <div>
+    <>
+      {/* Header */}
       <Header />
 
-      <h1 className="main-title">CSC Center Narsinghpur Garhi</h1>
+      {/* Main Heading */}
+      <section className="hero-section">
+        <h1 className="main-title">
+          CSC Center Narsinghpur Garhi
+        </h1>
 
-      <div className="service-grid">
-        {card_services.map((item, index) => (
-          <div
-            key={index}
-            className="service-card"
-            onClick={() => window.open(item.url, "_blank")}
-          >
-            <h2>{item.icon}</h2>
-            <h3>{item.title}</h3>
-          </div>
-        ))}
-      </div>
+        <p className="subtitle">
+          सभी सरकारी एवं ऑनलाइन सेवाएं एक ही स्थान पर
+        </p>
+      </section>
 
-      <ContactForm />
+      {/* Service Cards */}
+      <section className="service-section">
+        <div className="service-grid">
+          {card_services.map((item, index) => (
+            <div
+              key={index}
+              className="service-card"
+              onClick={() => window.open(item.url, "_blank")}
+            >
+              <h2>{item.icon}</h2>
+              <h3>{item.title}</h3>
+            </div>
+          ))}
+        </div>
+      </section>
 
+      {/* Contact Form */}
+      <section className="contact-section">
+        <ContactForm />
+      </section>
+
+      {/* Footer */}
       <Footer />
-    </div>
+    </>
   );
 }
 
