@@ -9,9 +9,9 @@ function Footer() {
         className="footer-logo"
       />
 
-      <h6 className="footer-text">
+      <h5 className="footer-text" style={{ color: "white", textAlign: "center" }}>
         © 2026 CSC Center Narsinghpur Garhi | All Rights Reserved
-      </h6>
+      </h5>
     </footer>
   );
 }

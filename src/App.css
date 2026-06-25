@@ -1,7 +1,7 @@
 .header {
   background: cornsilk;
   color: white;
-  padding: 18px 30px;
+  padding: 20px 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -12,7 +12,7 @@
 
 .header img {
   width: 110px;
-  height: 110px;
+  height: 150px;
   object-fit: contain;
   flex-shrink: 0;
 }
@@ -23,7 +23,7 @@
 }
 
 .header-center h1 {
-  font-size: 32px;
+  /* font-size: 32px; */
   margin: 0;
   color: darkblue;
   font-size: 50px;
@@ -304,6 +304,126 @@
 .contact-form button:disabled {
   opacity: 0.7;
   cursor: not-allowed;
+}
+
+.announcement-section {
+  background: #f3f7ff;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.announcement-card {
+  width: min(100%, 600px);
+  min-height: 500px;
+  background: #ffffff;
+  border-radius: 28px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.08);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.announcement-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.announcement-tag {
+  background: #003366;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.announcement-deadline {
+  color: #d65a16;
+  font-weight: 700;
+}
+
+.announcement-card h2 {
+  font-size: 32px;
+  margin: 0 0 18px;
+  color: #003366;
+}
+
+.announcement-card p {
+  font-size: 17px;
+  line-height: 1.75;
+  color: #44506c;
+  margin: 0 0 22px;
+}
+
+.announcement-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 26px;
+}
+
+.announcement-list li {
+  margin-bottom: 12px;
+  padding-left: 22px;
+  position: relative;
+  line-height: 1.7;
+}
+
+.announcement-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #003366;
+}
+
+.announcement-button {
+  display: inline-block;
+  background: #003366;
+  color: white;
+  padding: 14px 24px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  text-align: center;
+}
+
+.announcement-button:hover {
+  background: #ff9800;
+}
+
+.visitor-section {
+  margin-top: 30px;
+}
+
+.visitor-list {
+  display: grid;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.visitor-card {
+  background: #fff;
+  border: 1px solid #e3e7ef;
+  border-radius: 18px;
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+.visitor-card strong {
+  display: block;
+  font-size: 16px;
+  color: #003366;
+}
+
+.visitor-card p {
+  margin: 6px 0 0;
+  color: #4c5868;
 }
 
 .status-message {
@@ -1005,4 +1125,107 @@
 .app-navbar Link {
   text-decoration: none;
   color: inherit;
+}
+
+/* ===== Push-notification form fields (admin) ===== */
+.admin-form textarea,
+.admin-form select {
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+}
+.admin-form textarea:focus,
+.admin-form select:focus {
+  outline: none;
+  border-color: #003366;
+  box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
+}
+
+/* ===== Admin dashboard layout (admin-container) ===== */
+.admin-container {
+  background: #f5f5f5;
+  min-height: 100vh;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+.admin-container > * {
+  width: 100%;
+  max-width: 1000px;
+  box-sizing: border-box;
+}
+.admin-header h1 { margin: 0; color: #003366; font-size: 26px; }
+.admin-header button {
+  background: #6c757d; color: #fff; border: none;
+  padding: 10px 18px; border-radius: 8px; font-weight: bold; cursor: pointer;
+}
+.admin-header button:hover { background: #5a6268; }
+
+.admin-section h2 { margin: 0 0 16px; color: #003366; font-size: 20px; }
+
+/* Forms inside admin sections (the <form>s carry no class in the markup) */
+.admin-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.admin-section form input,
+.admin-section form textarea {
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+  width: 100%;
+  box-sizing: border-box;
+}
+.admin-section form textarea { min-height: 90px; resize: vertical; }
+.admin-section form input:focus,
+.admin-section form textarea:focus {
+  outline: none; border-color: #003366; box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
+}
+.admin-section form button {
+  align-self: flex-start;
+  background: #003366; color: #fff; border: none;
+  padding: 12px 22px; border-radius: 8px; font-weight: bold; cursor: pointer;
+}
+.admin-section form button:hover { background: #0057a3; }
+
+/* Service + announcement rows (.admin-card) */
+.admin-card { flex-wrap: wrap; }
+.admin-card span { font-size: 22px; }
+.admin-card > div { flex: 1; min-width: 200px; }
+.admin-card h4 { margin: 0 0 4px; color: #003366; }
+.admin-card p  { margin: 0 0 4px; color: #555; }
+.admin-card small { color: #888; }
+.admin-card button {
+  border: none; border-radius: 8px; padding: 8px 14px;
+  font-size: 13px; font-weight: bold; cursor: pointer;
+  background: #6c757d; color: #fff;
+}
+.admin-card button:last-child { background: #dc3545; }   /* Delete */
+
+/* Contact request cards — stack fields vertically */
+.visitor-card { flex-direction: column; align-items: flex-start; gap: 4px; }
+.visitor-card h4 { margin: 0 0 4px; color: #003366; font-size: 16px; }
+.visitor-card p { margin: 0; color: #4c5868; }
+
+/* ===== Admin responsive ===== */
+@media (max-width: 600px) {
+  .admin-container { padding: 18px 12px; }
+  .admin-header { flex-direction: column; align-items: flex-start; gap: 12px; padding: 16px; }
+  .admin-header h1 { font-size: 22px; }
+  .admin-section { padding: 18px 16px; }
+  .admin-card { gap: 10px; }
+  .admin-card button { flex: 1; }
+}
+h6{
+  color: darkblue;
+  font-size: 20px;
 }

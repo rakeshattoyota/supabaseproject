@@ -3,13 +3,16 @@ import { supabase } from "../supabase";
 import ContactForm from "../components/ContactForm";
 import serviceCards from "../components/card";
 
+
 export default function Home() {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [announcements, setAnnouncements] = useState([]);
 
   useEffect(() => {
     loadServices();
+    loadAnnouncements();
   }, []);
 
   async function loadServices() {
@@ -27,6 +30,20 @@ export default function Home() {
       setError(null);
     }
     setLoading(false);
+  }
+  async function loadAnnouncements() {
+    // Same table the admin pushes to (AdminDashboard → "Push Announcement")
+    const { data, error } = await supabase
+      .from("notifications")
+      .select("*")
+      .eq("active", true)
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.log(error);
+    } else {
+      setAnnouncements(data || []);
+    }
   }
 
   const hasDynamicServices = services.length > 0;
@@ -53,6 +70,37 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+     <section id="announcement" className="section announcement-section">
+  <h2 className="section-title">Latest Announcements</h2>
+
+  {announcements.length === 0 ? (
+    <div className="announcement-card">
+      <h3>No Active Announcements</h3>
+      <p>Latest updates will appear here.</p>
+    </div>
+  ) : (
+    announcements.map((item) => (
+      <div className="announcement-card" key={item.id}>
+        <div className="announcement-top">
+          <span className="announcement-tag">Notice</span>
+
+          <span className="announcement-deadline">
+            {item.deadline ? `Last Date: ${item.deadline}` : ""}
+          </span>
+        </div>
+
+        <h2>{item.title}</h2>
+
+        <p>{item.description}</p>
+
+        <a href="#contact" className="announcement-button">
+          Apply Now
+        </a>
+      </div>
+    ))
+  )}
+</section>
 
       <section id="services" className="section service-section">
         <h2 className="section-title">हमारी सेवाएं</h2>
@@ -83,8 +131,7 @@ export default function Home() {
       <section id="about" className="section about-section">
         <h2 className="section-title">About CSC Center</h2>
         <p className="section-description">
-          CSC Center Narsinghpur Garhi is your local service partner for government
-          ID cards, certificates and online enrollment support.
+          CSC Center Narsinghpur Garhi is a trusted Common Service Center located in Rewari, Haryana. We provide Aadhaar, PAN, Ayushman, Labour Card, PF, ESIC, PM Kisan, Lado Lakshmi and many other citizen services.
         </p>
 
         <div className="feature-grid">
@@ -106,7 +153,7 @@ export default function Home() {
       <section id="location" className="section location-section">
         <h2 className="section-title">Location</h2>
         <p className="section-description">
-          Visit us at the CSC Center in Narsinghpur Garhi, Rewari, Haryana.
+          Visit our center at Narsinghpur Garhi, Rewari, Haryana. Google Map Code: 3GR4+G2F.
         </p>
 
         <div className="location-card">
@@ -118,7 +165,7 @@ export default function Home() {
           </p>
           <button
             onClick={() =>
-              window.open("https://maps.google.com/?q=3GR4+G2F", "_blank")
+              window.open("https://www.google.com/maps/place/CSC+Center+Narsinghpur+Garhi/@28.0913946,76.5004967,17z/data=!4m10!1m2!2m1!1scsc+center+narsinghpur+garhi!3m6!1s0x390d550021305b3b:0xd59aae889f626b2d!8m2!3d28.0913946!4d76.5050028!15sChxjc2MgY2VudGVyIG5hcnNpbmdocHVyIGdhcmhpkgENaW50ZXJuZXRfY2FmZeABAA!16s%2Fg%2F11nqj7rfdr?entry=ttu&g_ep=EgoyMDI2MDYxNi4wIKXMDSoASAFQAw%3D%3D", "_blank")
             }
           >
             Open in Google Maps
