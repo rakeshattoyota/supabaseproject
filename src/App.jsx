@@ -29,7 +29,7 @@ function App() {
         </a>
 
         <a href="#about">
-          About Us
+          About Village
         </a>
 
         <a href="#location">
