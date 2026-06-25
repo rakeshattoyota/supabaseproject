@@ -1,92 +1,62 @@
 import { createClient } from '@supabase/supabase-js';
 
-const SUPABASE_URL = 'https://wjgmxhdgndpjkrafzaob.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndqZ214aGRnbmRwamtyYWZ6YW9iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzIzMzgsImV4cCI6MjA5NzM0ODMzOH0.hKFBu5zKqkD8e2rgsD7F7y039EKwjasLGnBLbti52W4';
+// One-time admin bootstrap. NO secrets in this file — everything comes from env.
+//
+// Usage (PowerShell):
+//   $env:VITE_SUPABASE_URL="https://your-ref.supabase.co"
+//   $env:VITE_SUPABASE_ANON_KEY="your-anon-key"
+//   $env:ADMIN_EMAIL="you@example.com"
+//   $env:ADMIN_PASSWORD="a-strong-unique-password"
+//   node setup-admin.js
+//
+// After the admin exists, DISABLE public sign-ups in Supabase:
+//   Authentication → Providers → Email → turn OFF "Enable sign ups".
+// Otherwise anyone could register and gain the `authenticated` role.
 
-console.log('Starting setup...');
-console.log('SUPABASE_URL:', SUPABASE_URL);
+const SUPABASE_URL = process.env.VITE_SUPABASE_URL;
+const SUPABASE_KEY = process.env.VITE_SUPABASE_ANON_KEY;
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+
+if (!SUPABASE_URL || !SUPABASE_KEY || !ADMIN_EMAIL || !ADMIN_PASSWORD) {
+  console.error(
+    'Missing env vars. Set VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY, ADMIN_EMAIL, ADMIN_PASSWORD.'
+  );
+  process.exit(1);
+}
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 async function setupAdmin() {
   try {
-    console.log('🔧 Setting up admin user and database...\n');
-
-    // 1. Create admin user
-    console.log('📝 Creating admin user...');
+    console.log('🔧 Creating admin user for', ADMIN_EMAIL, '...');
     const { data, error } = await supabase.auth.signUp({
-      email: 'csc.garhi2@gmail.com',
-      password: 'admin@5588',
+      email: ADMIN_EMAIL,
+      password: ADMIN_PASSWORD,
     });
 
     if (error) {
       if (error.message.includes('already registered')) {
-        console.log('⚠️  Admin user already exists');
-        console.log('   Email: csc.garhi2@gmail.com');
-        console.log('   Password: admin@5588');
+        console.log('⚠️  Admin user already exists — nothing to do.');
       } else {
         console.error('❌ Error creating admin user:', error.message);
       }
     } else {
-      console.log('✅ Admin user created!');
-      console.log('   Email: csc.garhi2@gmail.com');
-      console.log('   Password: admin@5588');
-      console.log('   User ID:', data.user?.id);
+      console.log('✅ Admin user created. User ID:', data.user?.id);
     }
 
-    // 2. Verify services table exists by trying to query it
-    console.log('\n📊 Checking services table...');
-    const { data: services, error: tableError } = await supabase
-      .from('services')
-      .select('*')
-      .limit(1);
-
+    // Sanity-check the services table is reachable
+    const { error: tableError } = await supabase.from('services').select('id').limit(1);
     if (tableError) {
-      console.log('⚠️  Services table does not exist.');
-      console.log('   Error: ' + tableError.message);
-      console.log('   \n   SQL to run in Supabase SQL Editor:');
-      console.log(`
-CREATE TABLE public.services (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  title TEXT NOT NULL,
-  icon TEXT,
-  url TEXT NOT NULL,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL,
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL
-);
-
-ALTER TABLE public.services ENABLE ROW LEVEL SECURITY;
-
-CREATE POLICY "Enable read access for all users"
-  ON public.services FOR SELECT
-  USING (true);
-
-CREATE POLICY "Enable insert for authenticated users"
-  ON public.services FOR INSERT
-  WITH CHECK (true);
-
-CREATE POLICY "Enable delete for authenticated users"
-  ON public.services FOR DELETE
-  USING (true);
-
-CREATE POLICY "Enable update for authenticated users"
-  ON public.services FOR UPDATE
-  WITH CHECK (true);
-      `);
+      console.log('⚠️  services table not reachable:', tableError.message);
+      console.log('   Run supabase_setup.sql in the Supabase SQL Editor first.');
     } else {
-      console.log('✅ Services table exists!');
-      console.log(`   Records found: ${services.length}`);
+      console.log('✅ services table reachable.');
     }
 
-    console.log('\n✨ Setup complete!');
-    console.log('\n📱 Admin Login Details:');
-    console.log('   URL: http://localhost:5173/supabaseproject/login');
-    console.log('   Email: csc.garhi2@gmail.com');
-    console.log('   Password: admin@5588');
-
-  } catch (error) {
-    console.error('❌ Setup failed:', error.message);
-    console.error(error);
+    console.log('\n✨ Done. Remember to DISABLE public sign-ups in Supabase Auth.');
+  } catch (err) {
+    console.error('❌ Setup failed:', err.message);
   }
 }
 
