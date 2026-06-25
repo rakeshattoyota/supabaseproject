@@ -1,137 +1,67 @@
+// Common government / digital services shown on the Home page.
+// category: "central" | "haryana"  ·  color: accent colour for the card.
+// All URLs are official portals and open in a new tab.
+
 const serviceCards = [
-  {
-    title: "आधार कार्ड",
-    icon: "🪪",
-    description: "UIDAI Enrollment, update और जानकारी।",
-    url: "https://myaadhaar.uidai.gov.in/"
-  },
-  {
-    title: "पैन कार्ड",
-    icon: "💳",
-    description: "PAN आवेदन और लिंक सेवाएँ।",
-    url: "https://www.onlineservices.nsdl.com/"
-  },
-  {
-    title: "ई-श्रम कार्ड",
-    icon: "👷",
-    description: "श्रमिक पंजीकरण और लाभ।",
-    url: "https://eshram.gov.in/"
-  },
-  {
-    title: "आयुष्मान भारत",
-    icon: "🏥",
-    description: "Ayushman card enrollment और सुविधा।",
-    url: "https://mera.pmjay.gov.in/"
-  },
-  {
-    title: "वोटर आईडी",
-    icon: "🗳️",
-    description: "Voter registration और अपडेट।",
-    url: "https://voterservices.eci.gov.in/"
-  },
-  {
-    title: "राशन कार्ड",
-    icon: "🍚",
-    description: "राशन कार्ड आवेदन और स्थिति जाँच।",
-    url: "https://rationcard.up.gov.in/"
-  },
-  {
-    title: "पीएफ (PF)",
-    icon: "💼",
-    description: "भविष्य निधि खाता खोलना और प्रबंधन।",
-    url: "https://www.epfindia.gov.in/"
-  },
-  {
-    title: "ईएसआईसी (ESIC)",
-    icon: "🏛️",
-    description: "कर्मचारी राज्य बीमा योजना।",
-    url: "https://esic.gov.in/"
-  },
-  {
-    title: "लेबर कार्ड",
-    icon: "📋",
-    description: "मजदूर पंजीकरण और सुविधाएं।",
-    url: "https://labour.gov.in/"
-  },
-  {
-    title: "पीएम किसान",
-    icon: "🌾",
-    description: "किसान सम्मान निधि योजना।",
-    url: "https://pmkisan.gov.in/"
-  },
-  {
-    title: "लाडो लक्ष्मी योजना",
-    icon: "👧",
-    description: "बेटी के जन्म पर वित्तीय सहायता।",
-    url: "https://ladolakshmi.haryana.gov.in/"
-  },
-  {
-    title: "डिजिटल हस्ताक्षर",
-    icon: "✍️",
-    description: "डिजिटल हस्ताक्षर प्रमाणपत्र।",
-    url: "https://www.certindia.gov.in/"
-  },
-  {
-    title: "पासपोर्ट",
-    icon: "📖",
-    description: "पासपोर्ट आवेदन और सेवाएं।",
-    url: "https://www.passportindia.gov.in/"
-  },
-  {
-    title: "ड्राइविंग लाइसेंस",
-    icon: "🚗",
-    description: "ड्राइविंग लाइसेंस आवेदन।",
-    url: "https://sarthi.parivahan.gov.in/"
-  },
-  {
-    title: "बिजली बिल",
-    icon: "⚡",
-    description: "बिजली बिल भुगतान और मानदंड।",
-    url: "https://www.bijlidost.in/"
-  },
-  {
-    title: "पानी बिल",
-    icon: "💧",
-    description: "पानी की आपूर्ति और बिल जानकारी।",
-    url: "https://www.ndmc.gov.in/"
-  },
-  {
-    title: "जन्म प्रमाणपत्र",
-    icon: "👶",
-    description: "जन्म प्रमाणपत्र आवेदन।",
-    url: "https://crsorgi.gov.in/"
-  },
-  {
-    title: "मृत्यु प्रमाणपत्र",
-    icon: "📄",
-    description: "मृत्यु प्रमाणपत्र आवेदन।",
-    url: "https://crsorgi.gov.in/"
-  },
-  {
-    title: "विवाह प्रमाणपत्र",
-    icon: "💑",
-    description: "विवाह प्रमाणपत्र और पंजीकरण।",
-    url: "https://crsorgi.gov.in/"
-  },
-  {
-    title: "आनलाइन एफआईआर",
-    icon: "🚔",
-    description: "अपराध की रिपोर्ट दर्ज करें।",
-    url: "https://haryana.police.gov.in/"
-  },
-  {
-    title: "बैंक खाता",
-    icon: "🏦",
-    description: "प्रधानमंत्री जन धन योजना।",
-    url: "https://pmjdy.gov.in/"
-  },
-  {
-    title: "बीमा सेवाएं",
-    icon: "🛡️",
-    description: "बीमा पॉलिसी और दावे।",
-    url: "https://www.irdai.gov.in/"
-  }
+  // ================= CENTRAL GOVERNMENT =================
+  { category: "central", color: "#2563eb", icon: "🪪", title: "आधार कार्ड",
+    description: "UIDAI — नामांकन, अपडेट व डाउनलोड।", url: "https://myaadhaar.uidai.gov.in/" },
+  { category: "central", color: "#7c3aed", icon: "💳", title: "पैन कार्ड (PAN)",
+    description: "नया PAN आवेदन व सुधार।", url: "https://www.protean-tinpan.com/" },
+  { category: "central", color: "#0f766e", icon: "🧾", title: "इनकम टैक्स / ITR",
+    description: "ई-फाइलिंग व इंस्टैंट e-PAN।", url: "https://www.incometax.gov.in/" },
+  { category: "central", color: "#dc2626", icon: "🏥", title: "आयुष्मान भारत",
+    description: "PM-JAY स्वास्थ्य कार्ड व लाभ।", url: "https://pmjay.gov.in/" },
+  { category: "central", color: "#b45309", icon: "💼", title: "पीएफ (EPFO)",
+    description: "भविष्य निधि खाता व पासबुक।", url: "https://www.epfindia.gov.in/" },
+  { category: "central", color: "#0891b2", icon: "🩺", title: "ईएसआईसी (ESIC)",
+    description: "कर्मचारी राज्य बीमा सेवाएं।", url: "https://www.esic.gov.in/" },
+  { category: "central", color: "#16a34a", icon: "🌾", title: "पीएम किसान",
+    description: "किसान सम्मान निधि योजना।", url: "https://pmkisan.gov.in/" },
+  { category: "central", color: "#4f46e5", icon: "🗳️", title: "वोटर आईडी",
+    description: "मतदाता पंजीकरण व सुधार।", url: "https://voters.eci.gov.in/" },
+  { category: "central", color: "#ea580c", icon: "👷", title: "ई-श्रम कार्ड",
+    description: "असंगठित श्रमिक पंजीकरण।", url: "https://eshram.gov.in/" },
+  { category: "central", color: "#ca8a04", icon: "🍚", title: "राशन कार्ड (NFSA)",
+    description: "राशन कार्ड व खाद्य सुरक्षा।", url: "https://nfsa.gov.in/" },
+  { category: "central", color: "#1d4ed8", icon: "📖", title: "पासपोर्ट",
+    description: "पासपोर्ट आवेदन व अपॉइंटमेंट।", url: "https://www.passportindia.gov.in/" },
+  { category: "central", color: "#475569", icon: "🚗", title: "ड्राइविंग लाइसेंस",
+    description: "लाइसेंस व वाहन सेवाएं (परिवहन)।", url: "https://parivahan.gov.in/" },
+  { category: "central", color: "#0284c7", icon: "📂", title: "डिजिलॉकर",
+    description: "डिजिटल दस्तावेज़ सुरक्षित रखें।", url: "https://www.digilocker.gov.in/" },
+  { category: "central", color: "#db2777", icon: "📱", title: "UMANG",
+    description: "एक ऐप में सैकड़ों सरकारी सेवाएं।", url: "https://web.umang.gov.in/" },
+  { category: "central", color: "#9333ea", icon: "🎓", title: "छात्रवृत्ति (NSP)",
+    description: "नेशनल स्कॉलरशिप पोर्टल।", url: "https://scholarships.gov.in/" },
+  { category: "central", color: "#15803d", icon: "🏦", title: "जन धन / बैंक",
+    description: "प्रधानमंत्री जन धन योजना।", url: "https://pmjdy.gov.in/" },
+  { category: "central", color: "#0d9488", icon: "🧮", title: "जीएसटी (GST)",
+    description: "GST पंजीकरण व रिटर्न।", url: "https://www.gst.gov.in/" },
+  { category: "central", color: "#be185d", icon: "👶", title: "जन्म / मृत्यु प्रमाणपत्र",
+    description: "नागरिक पंजीकरण (CRS)।", url: "https://crsorgi.gov.in/" },
+
+  // ================= HARYANA GOVERNMENT =================
+  { category: "haryana", color: "#ea580c", icon: "🆔", title: "परिवार पहचान पत्र (PPP)",
+    description: "Family ID — मेरा परिवार हरियाणा।", url: "https://meraparivar.haryana.gov.in/" },
+  { category: "haryana", color: "#2563eb", icon: "🖥️", title: "सरल हरियाणा",
+    description: "300+ सरकारी सेवाएं एक जगह।", url: "https://saralharyana.gov.in/" },
+  { category: "haryana", color: "#16a34a", icon: "🌾", title: "मेरी फसल मेरा ब्योरा",
+    description: "फसल पंजीकरण व खरीद।", url: "https://fasal.haryana.gov.in/" },
+  { category: "haryana", color: "#b45309", icon: "🗺️", title: "जमाबंदी (भूमि रिकॉर्ड)",
+    description: "ज़मीन का रिकॉर्ड व नकल।", url: "https://jamabandi.nic.in/" },
+  { category: "haryana", color: "#0891b2", icon: "👷‍♂️", title: "हरियाणा श्रम विभाग",
+    description: "लेबर कार्ड व BOCW लाभ।", url: "https://hrylabour.gov.in/" },
+  { category: "haryana", color: "#7c3aed", icon: "💼", title: "कौशल रोज़गार निगम",
+    description: "हरियाणा रोज़गार पंजीकरण।", url: "https://hkrnl.itiharyana.gov.in/" },
+  { category: "haryana", color: "#475569", icon: "🏘️", title: "प्रॉपर्टी आईडी (ULB)",
+    description: "शहरी संपत्ति आईडी व टैक्स।", url: "https://ulbharyana.gov.in/" },
+  { category: "haryana", color: "#ca8a04", icon: "⚡", title: "बिजली बिल (DHBVN)",
+    description: "बिजली बिल भुगतान व शिकायत।", url: "https://www.dhbvn.org.in/" },
+  { category: "haryana", color: "#be123c", icon: "👵", title: "पेंशन / सामाजिक न्याय",
+    description: "वृद्धावस्था, विधवा व दिव्यांग पेंशन।", url: "https://socialjusticehry.gov.in/" },
+  { category: "haryana", color: "#1e3a8a", icon: "🚔", title: "हरियाणा पुलिस / FIR",
+    description: "ऑनलाइन शिकायत व सेवाएं।", url: "https://haryana.police.gov.in/" },
 ];
 
 export default serviceCards;
-

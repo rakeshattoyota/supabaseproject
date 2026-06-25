@@ -46,8 +46,22 @@ export default function Home() {
     }
   }
 
-  const hasDynamicServices = services.length > 0;
-  const displayedServices = hasDynamicServices ? services : serviceCards;
+  const centralServices = serviceCards.filter((s) => s.category === "central");
+  const haryanaServices = serviceCards.filter((s) => s.category === "haryana");
+
+  const renderCard = (item, index) => (
+    <button
+      key={item.id || `${item.title}-${index}`}
+      className="service-card"
+      style={{ "--accent": item.color || "#003366" }}
+      onClick={() => window.open(item.url, "_blank", "noopener,noreferrer")}
+    >
+      <div className="service-icon">{item.icon || "🔧"}</div>
+      <h3>{item.title}</h3>
+      {item.description ? <p>{item.description}</p> : null}
+      <span className="svc-open">खोलें&nbsp;↗</span>
+    </button>
+  );
 
   return (
     <>
@@ -105,27 +119,27 @@ export default function Home() {
       <section id="services" className="section service-section">
         <h2 className="section-title">हमारी सेवाएं</h2>
         <p className="section-description">
-          भरोसेमंद सरकारी और डिजिटल सेवाएं, सीधे आपके नजदीकी CSC सेंटर से।
+          भरोसेमंद सरकारी और डिजिटल सेवाएं — एक क्लिक में आधिकारिक वेबसाइट नई टैब में खुलेगी।
         </p>
 
-        {error ? <p className="service-error">Unable to load services: {error}</p> : null}
-        {loading ? (
-          <p className="service-loading">Loading services...</p>
-        ) : null}
-
+        <h3 className="svc-group-title central">🇮🇳 केंद्र सरकार सेवाएं</h3>
         <div className="service-grid">
-          {displayedServices.map((item, index) => (
-            <button
-              key={item.id || index}
-              className="service-card"
-              onClick={() => window.open(item.url, "_blank")}
-            >
-              <div className="service-icon">{item.icon || "🔧"}</div>
-              <h3>{item.title}</h3>
-              {item.description ? <p>{item.description}</p> : null}
-            </button>
-          ))}
+          {centralServices.map(renderCard)}
         </div>
+
+        <h3 className="svc-group-title haryana">🟧 हरियाणा सरकार सेवाएं</h3>
+        <div className="service-grid">
+          {haryanaServices.map(renderCard)}
+        </div>
+
+        {services.length > 0 && (
+          <>
+            <h3 className="svc-group-title">➕ अन्य सेवाएं</h3>
+            <div className="service-grid">
+              {services.map(renderCard)}
+            </div>
+          </>
+        )}
       </section>
 
       <section id="location" className="section location-section">
