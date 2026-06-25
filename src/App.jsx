@@ -5,6 +5,7 @@ import { Link, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HelpModal from "./components/HelpModal";
+import AboutVillageModal from "./components/AboutVillageModal";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 import Home from "./pages/Home";
@@ -13,6 +14,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 
 function App() {
   const [showHelp, setShowHelp] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
 
   return (
     <div className="app-container">
@@ -28,7 +30,7 @@ function App() {
           Services
         </a>
 
-        <a href="#about">
+        <a href="#about" onClick={(e) => { e.preventDefault(); setShowAbout(true); }}>
           About Village
         </a>
 
@@ -83,6 +85,12 @@ function App() {
       <HelpModal
         open={showHelp}
         onClose={() => setShowHelp(false)}
+      />
+
+      {/* About Village Popup */}
+      <AboutVillageModal
+        open={showAbout}
+        onClose={() => setShowAbout(false)}
       />
 
       {/* Footer */}

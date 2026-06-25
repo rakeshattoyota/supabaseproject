@@ -1238,45 +1238,107 @@ h6{
   font-size: 20px;
 }
 
-/* ===== About Village block ===== */
-.about-block {
-  max-width: 900px;
-  margin: 28px auto 0;
-  background: #ffffff;
-  border: 1px solid #e6ecf5;
-  border-radius: 20px;
-  padding: 28px 32px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
-  text-align: left;
+/* ===== About Village popup ===== */
+.village-modal-bg {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(3px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
 }
-.about-block h3 {
-  color: #003366;
-  font-size: 20px;
-  margin: 22px 0 10px;
+.village-modal {
+  width: min(680px, 100%);
+  max-height: 92vh;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
+  position: relative;
+  animation: vmPop 0.25s ease;
 }
-.about-block h3:first-child { margin-top: 0; }
-.about-block p {
-  color: #44506c;
-  font-size: 16px;
-  line-height: 1.8;
-  margin: 0 0 12px;
+@keyframes vmPop { from { transform: scale(0.94); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.vm-close {
+  position: absolute; top: 12px; right: 14px; z-index: 2;
+  width: 36px; height: 36px; border-radius: 50%;
+  border: none; cursor: pointer;
+  background: rgba(255, 255, 255, 0.3); color: #fff;
+  font-size: 24px; line-height: 1;
 }
-.about-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 12px;
+.vm-close:hover { background: rgba(255, 255, 255, 0.5); }
+
+.vm-hero {
+  display: flex; align-items: center; gap: 18px;
+  padding: 26px 28px;
+  background: linear-gradient(135deg, #ff6f00 0%, #f9a825 55%, #ffca28 100%);
+  color: #fff;
+  border-radius: 22px 22px 0 0;
+}
+.vm-emblem {
+  width: 96px; height: 96px; flex-shrink: 0;
+  border-radius: 50%; overflow: hidden;
+  background: #fff7e6;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  border: 3px solid #fff;
+}
+.vm-emblem img { width: 100%; height: 100%; object-fit: cover; }
+.vm-hero-text h2 { margin: 4px 0 2px; font-size: 30px; }
+.vm-hero-text p { margin: 0; opacity: 0.95; font-size: 14px; }
+.vm-kicker { font-size: 13px; font-weight: 700; letter-spacing: 0.5px; }
+
+.vm-body { padding: 24px 28px 28px; }
+.vm-intro { font-size: 16px; line-height: 1.8; color: #334155; margin: 0 0 18px; }
+
+.vm-facts {
   display: grid;
-  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px; margin-bottom: 22px;
 }
-.about-list li {
-  font-size: 15.5px;
-  color: #2c3a57;
-  line-height: 1.6;
+.vm-fact {
+  border-radius: 14px; padding: 12px 14px;
+  display: flex; flex-direction: column; gap: 4px;
+  border-left: 5px solid;
 }
-.about-block .announcement-button { margin-top: 8px; }
+.vm-fact span { font-size: 12.5px; font-weight: 700; opacity: 0.85; }
+.vm-fact b { font-size: 14.5px; color: #1e293b; }
+.vm-fact.f-blue   { background: #eef4ff; border-color: #2563eb; }
+.vm-fact.f-green  { background: #e9f9ef; border-color: #16a34a; }
+.vm-fact.f-amber  { background: #fff6e6; border-color: #d97706; }
+.vm-fact.f-purple { background: #f4eefe; border-color: #7c3aed; }
+.vm-fact.f-teal   { background: #e6fbf7; border-color: #0d9488; }
+.vm-fact.f-rose   { background: #fdeef2; border-color: #e11d48; }
+
+.vm-parshuram {
+  background: linear-gradient(135deg, #fff8ec, #fde7cf);
+  border: 1px solid #f3d9a8;
+  border-radius: 16px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+}
+.vm-parshuram h3 { margin: 0 0 10px; color: #b45309; font-size: 19px; }
+.vm-parshuram p { margin: 0; color: #4b3a1f; line-height: 1.85; font-size: 15.5px; }
+
+.vm-h3 { color: #003366; font-size: 18px; margin: 18px 0 8px; }
+.vm-p { color: #475569; line-height: 1.8; font-size: 15px; margin: 0 0 8px; }
+.vm-list { list-style: none; padding: 0; margin: 0 0 18px; display: grid; gap: 7px; }
+.vm-list li { font-size: 15px; color: #334155; }
+
+.vm-csc {
+  background: #f1f5fb; border-radius: 16px;
+  padding: 16px 18px; text-align: center;
+}
+.vm-csc p { margin: 0 0 12px; color: #334155; line-height: 1.8; }
+.vm-btn {
+  display: inline-block;
+  background: #003366; color: #fff;
+  padding: 11px 26px; border-radius: 999px;
+  font-weight: 700; text-decoration: none;
+}
+.vm-btn:hover { background: #0057a3; }
 
 @media (max-width: 600px) {
-  .about-block { padding: 20px 18px; border-radius: 16px; }
-  .about-block h3 { font-size: 17px; }
-  .about-block p { font-size: 14.5px; }
+  .vm-hero { flex-direction: column; text-align: center; padding: 22px 18px; }
+  .vm-hero-text h2 { font-size: 24px; }
+  .vm-body { padding: 18px 18px 22px; }
+  .vm-facts { grid-template-columns: 1fr 1fr; }
 }
