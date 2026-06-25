@@ -4,6 +4,7 @@ import { supabase } from "../supabase";
 export default function AdminDashboard() {
   const [services, setServices] = useState([]);
   const [visitors, setVisitors] = useState([]);
+  const [visitorError, setVisitorError] = useState(null);
   const [notifications, setNotifications] = useState([]);
 
   const [title, setTitle] = useState("");
@@ -49,11 +50,18 @@ export default function AdminDashboard() {
   }
 
   async function loadVisitors() {
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("contact_us")
       .select("*")
       .order("id", { ascending: false });
 
+    if (error) {
+      console.error(error);
+      setVisitorError(error.message);
+      setVisitors([]);
+      return;
+    }
+    setVisitorError(null);
     setVisitors(data || []);
   }
 
@@ -168,17 +176,30 @@ export default function AdminDashboard() {
       </section>
 
       <section className="admin-section">
-        <h2>Contact Requests</h2>
+        <h2>Contact Requests {visitors.length > 0 ? `(${visitors.length})` : ""}</h2>
 
-        {visitors.map((item) => (
-          <div key={item.id} className="visitor-card">
-            <h4>{item.name}</h4>
-            <p>📞 {item.phone}</p>
-            <p>📧 {item.email}</p>
-            <p>🏡 {item.village}</p>
-            <p>🛠 {item.service}</p>
-          </div>
-        ))}
+        {visitorError ? (
+          <p className="service-error">
+            Unable to load contact requests: {visitorError}
+            <br />
+            Make sure the <code>contact_us</code> table exists (run supabase_setup.sql).
+          </p>
+        ) : visitors.length === 0 ? (
+          <p>No contact requests yet. Submissions from the website's Contact Us form will appear here.</p>
+        ) : (
+          visitors.map((item) => (
+            <div key={item.id} className="visitor-card">
+              <h4>{item.name}</h4>
+              <p>📞 {item.phone}</p>
+              <p>📧 {item.email}</p>
+              <p>🏡 {item.village}</p>
+              <p>🛠 {item.service}</p>
+              {item.created_at ? (
+                <p className="visitor-time">🕒 {new Date(item.created_at).toLocaleString()}</p>
+              ) : null}
+            </div>
+          ))
+        )}
       </section>
     </div>
   );
