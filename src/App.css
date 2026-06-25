@@ -1,7 +1,7 @@
 .header {
   background: cornsilk;
   color: white;
-  padding: 18px 30px;
+  padding: 20px 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -12,7 +12,7 @@
 
 .header img {
   width: 110px;
-  height: 110px;
+  height: 150px;
   object-fit: contain;
   flex-shrink: 0;
 }
@@ -23,7 +23,7 @@
 }
 
 .header-center h1 {
-  font-size: 32px;
+  /* font-size: 32px; */
   margin: 0;
   color: darkblue;
   font-size: 50px;
@@ -169,36 +169,67 @@
 }
 
 .service-card {
-  background: white;
+  --accent: #003366;
+  position: relative;
+  background: #fff;
   border: 1px solid #e3e7ef;
-  border-radius: 22px;
-  padding: 24px;
+  border-top: 5px solid var(--accent);
+  border-radius: 18px;
+  padding: 22px 22px 44px;
   text-align: left;
   cursor: pointer;
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
 .service-card:hover {
-  transform: translateY(-4px);
-  border-color: #ff9800;
-  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.08);
+  transform: translateY(-5px);
+  border-color: var(--accent);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.12);
 }
 
 .service-icon {
-  font-size: 48px;
-  margin-bottom: 18px;
+  font-size: 42px;
+  margin-bottom: 12px;
+  width: 64px; height: 64px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--accent) 14%, #fff);
 }
 
 .service-card h3 {
-  font-size: 20px;
-  margin-bottom: 10px;
+  font-size: 18px;
+  margin: 0 0 6px;
+  color: #1e293b;
 }
 
 .service-card p {
   color: #5b6778;
-  line-height: 1.7;
+  line-height: 1.6;
   margin: 0;
+  font-size: 14px;
 }
+
+.service-card .svc-open {
+  position: absolute;
+  bottom: 14px; left: 22px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* Service group headings (Central / Haryana) */
+.svc-group-title {
+  max-width: 1200px;
+  margin: 26px auto 14px;
+  padding-left: 14px;
+  border-left: 6px solid #ff9800;
+  font-size: 20px;
+  color: #003366;
+  text-align: left;
+}
+.svc-group-title.central { border-left-color: #2563eb; }
+.svc-group-title.haryana { border-left-color: #ea580c; }
 
 .feature-grid {
   display: grid;
@@ -304,6 +335,133 @@
 .contact-form button:disabled {
   opacity: 0.7;
   cursor: not-allowed;
+}
+
+.announcement-section {
+  background: #f3f7ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 40px 20px;
+}
+
+.announcement-section .section-title {
+  text-align: center;
+  margin: 0;
+}
+
+.announcement-card {
+  width: min(100%, 600px);
+  min-height: 500px;
+  background: #ffffff;
+  border-radius: 28px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.08);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.announcement-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.announcement-tag {
+  background: #003366;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.announcement-deadline {
+  color: #d65a16;
+  font-weight: 700;
+}
+
+.announcement-card h2 {
+  font-size: 32px;
+  margin: 0 0 18px;
+  color: #003366;
+}
+
+.announcement-card p {
+  font-size: 17px;
+  line-height: 1.75;
+  color: #44506c;
+  margin: 0 0 22px;
+}
+
+.announcement-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 26px;
+}
+
+.announcement-list li {
+  margin-bottom: 12px;
+  padding-left: 22px;
+  position: relative;
+  line-height: 1.7;
+}
+
+.announcement-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #003366;
+}
+
+.announcement-button {
+  display: inline-block;
+  background: #003366;
+  color: white;
+  padding: 14px 24px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  text-align: center;
+}
+
+.announcement-button:hover {
+  background: #ff9800;
+}
+
+.visitor-section {
+  margin-top: 30px;
+}
+
+.visitor-list {
+  display: grid;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.visitor-card {
+  background: #fff;
+  border: 1px solid #e3e7ef;
+  border-radius: 18px;
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+.visitor-card strong {
+  display: block;
+  font-size: 16px;
+  color: #003366;
+}
+
+.visitor-card p {
+  margin: 6px 0 0;
+  color: #4c5868;
 }
 
 .status-message {
@@ -1005,4 +1163,213 @@
 .app-navbar Link {
   text-decoration: none;
   color: inherit;
+}
+
+/* ===== Push-notification form fields (admin) ===== */
+.admin-form textarea,
+.admin-form select {
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+}
+.admin-form textarea:focus,
+.admin-form select:focus {
+  outline: none;
+  border-color: #003366;
+  box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
+}
+
+/* ===== Admin dashboard layout (admin-container) ===== */
+.admin-container {
+  background: #f5f5f5;
+  min-height: 100vh;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+.admin-container > * {
+  width: 100%;
+  max-width: 1000px;
+  box-sizing: border-box;
+}
+.admin-header h1 { margin: 0; color: #003366; font-size: 26px; }
+.admin-header button {
+  background: #6c757d; color: #fff; border: none;
+  padding: 10px 18px; border-radius: 8px; font-weight: bold; cursor: pointer;
+}
+.admin-header button:hover { background: #5a6268; }
+
+.admin-section h2 { margin: 0 0 16px; color: #003366; font-size: 20px; }
+
+/* Forms inside admin sections (the <form>s carry no class in the markup) */
+.admin-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.admin-section form input,
+.admin-section form textarea {
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+  width: 100%;
+  box-sizing: border-box;
+}
+.admin-section form textarea { min-height: 90px; resize: vertical; }
+.admin-section form input:focus,
+.admin-section form textarea:focus {
+  outline: none; border-color: #003366; box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
+}
+.admin-section form button {
+  align-self: flex-start;
+  background: #003366; color: #fff; border: none;
+  padding: 12px 22px; border-radius: 8px; font-weight: bold; cursor: pointer;
+}
+.admin-section form button:hover { background: #0057a3; }
+
+/* Service + announcement rows (.admin-card) */
+.admin-card { flex-wrap: wrap; }
+.admin-card span { font-size: 22px; }
+.admin-card > div { flex: 1; min-width: 200px; }
+.admin-card h4 { margin: 0 0 4px; color: #003366; }
+.admin-card p  { margin: 0 0 4px; color: #555; }
+.admin-card small { color: #888; }
+.admin-card button {
+  border: none; border-radius: 8px; padding: 8px 14px;
+  font-size: 13px; font-weight: bold; cursor: pointer;
+  background: #6c757d; color: #fff;
+}
+.admin-card button:last-child { background: #dc3545; }   /* Delete */
+
+/* Contact request cards — stack fields vertically */
+.visitor-card { flex-direction: column; align-items: flex-start; gap: 4px; }
+.visitor-card h4 { margin: 0 0 4px; color: #003366; font-size: 16px; }
+.visitor-card p { margin: 0; color: #4c5868; }
+.visitor-time { font-size: 12px; color: #8892a4; margin-top: 6px !important; }
+
+/* ===== Admin responsive ===== */
+@media (max-width: 600px) {
+  .admin-container { padding: 18px 12px; }
+  .admin-header { flex-direction: column; align-items: flex-start; gap: 12px; padding: 16px; }
+  .admin-header h1 { font-size: 22px; }
+  .admin-section { padding: 18px 16px; }
+  .admin-card { gap: 10px; }
+  .admin-card button { flex: 1; }
+}
+h6{
+  color: darkblue;
+  font-size: 20px;
+}
+
+/* ===== About Village popup ===== */
+.village-modal-bg {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(3px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.village-modal {
+  width: min(680px, 100%);
+  max-height: 92vh;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
+  position: relative;
+  animation: vmPop 0.25s ease;
+}
+@keyframes vmPop { from { transform: scale(0.94); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.vm-close {
+  position: absolute; top: 12px; right: 14px; z-index: 2;
+  width: 36px; height: 36px; border-radius: 50%;
+  border: none; cursor: pointer;
+  background: rgba(255, 255, 255, 0.3); color: #fff;
+  font-size: 24px; line-height: 1;
+}
+.vm-close:hover { background: rgba(255, 255, 255, 0.5); }
+
+.vm-hero {
+  display: flex; align-items: center; gap: 18px;
+  padding: 26px 28px;
+  background: linear-gradient(135deg, #ff6f00 0%, #f9a825 55%, #ffca28 100%);
+  color: #fff;
+  border-radius: 22px 22px 0 0;
+}
+.vm-emblem {
+  width: 96px; height: 96px; flex-shrink: 0;
+  border-radius: 50%; overflow: hidden;
+  background: #fff7e6;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  border: 3px solid #fff;
+}
+.vm-emblem img { width: 100%; height: 100%; object-fit: cover; }
+.vm-hero-text h2 { margin: 4px 0 2px; font-size: 30px; }
+.vm-hero-text p { margin: 0; opacity: 0.95; font-size: 14px; }
+.vm-kicker { font-size: 13px; font-weight: 700; letter-spacing: 0.5px; }
+
+.vm-body { padding: 24px 28px 28px; }
+.vm-intro { font-size: 16px; line-height: 1.8; color: #334155; margin: 0 0 18px; }
+
+.vm-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px; margin-bottom: 22px;
+}
+.vm-fact {
+  border-radius: 14px; padding: 12px 14px;
+  display: flex; flex-direction: column; gap: 4px;
+  border-left: 5px solid;
+}
+.vm-fact span { font-size: 12.5px; font-weight: 700; opacity: 0.85; }
+.vm-fact b { font-size: 14.5px; color: #1e293b; }
+.vm-fact.f-blue   { background: #eef4ff; border-color: #2563eb; }
+.vm-fact.f-green  { background: #e9f9ef; border-color: #16a34a; }
+.vm-fact.f-amber  { background: #fff6e6; border-color: #d97706; }
+.vm-fact.f-purple { background: #f4eefe; border-color: #7c3aed; }
+.vm-fact.f-teal   { background: #e6fbf7; border-color: #0d9488; }
+.vm-fact.f-rose   { background: #fdeef2; border-color: #e11d48; }
+
+.vm-parshuram {
+  background: linear-gradient(135deg, #fff8ec, #fde7cf);
+  border: 1px solid #f3d9a8;
+  border-radius: 16px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+}
+.vm-parshuram h3 { margin: 0 0 10px; color: #b45309; font-size: 19px; }
+.vm-parshuram p { margin: 0; color: #4b3a1f; line-height: 1.85; font-size: 15.5px; }
+
+.vm-h3 { color: #003366; font-size: 18px; margin: 18px 0 8px; }
+.vm-p { color: #475569; line-height: 1.8; font-size: 15px; margin: 0 0 8px; }
+.vm-list { list-style: none; padding: 0; margin: 0 0 18px; display: grid; gap: 7px; }
+.vm-list li { font-size: 15px; color: #334155; }
+
+.vm-csc {
+  background: #f1f5fb; border-radius: 16px;
+  padding: 16px 18px; text-align: center;
+}
+.vm-csc p { margin: 0 0 12px; color: #334155; line-height: 1.8; }
+.vm-btn {
+  display: inline-block;
+  background: #003366; color: #fff;
+  padding: 11px 26px; border-radius: 999px;
+  font-weight: 700; text-decoration: none;
+}
+.vm-btn:hover { background: #0057a3; }
+
+@media (max-width: 600px) {
+  .vm-hero { flex-direction: column; text-align: center; padding: 22px 18px; }
+  .vm-hero-text h2 { font-size: 24px; }
+  .vm-body { padding: 18px 18px 22px; }
+  .vm-facts { grid-template-columns: 1fr 1fr; }
 }

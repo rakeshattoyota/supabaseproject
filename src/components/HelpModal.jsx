@@ -20,7 +20,7 @@ export default function HelpModal({ open, onClose }) {
           </p>
           <button
             onClick={() =>
-              window.open("https://maps.google.com/?q=3GR4+G2F", "_blank")
+              window.open("https://www.google.com/maps/place/CSC+Center+Narsinghpur+Garhi/@28.0913946,76.5004967,17z/data=!4m10!1m2!2m1!1scsc+center+narsinghpur+garhi!3m6!1s0x390d550021305b3b:0xd59aae889f626b2d!8m2!3d28.0913946!4d76.5050028!15sChxjc2MgY2VudGVyIG5hcnNpbmdocHVyIGdhcmhpkgENaW50ZXJuZXRfY2FmZeABAA!16s%2Fg%2F11nqj7rfdr?entry=ttu&g_ep=EgoyMDI2MDYxNi4wIKXMDSoASAFQAw%3D%3D", "_blank")
             }
           >
             View on Google Maps

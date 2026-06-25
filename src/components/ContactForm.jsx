@@ -7,108 +7,98 @@ function ContactForm() {
   const [phone, setPhone] = useState("");
   const [village, setVillage] = useState("");
   const [service, setService] = useState("");
-  const [message, setMessage] = useState("");
-  const [status, setStatus] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function saveVisitor(e) {
     e.preventDefault();
-    setIsSubmitting(true);
-    setStatus("");
 
-    const { error } = await supabase
-      .from("visitors")
+    const { data, error } = await supabase
+      .from("contact_us")
       .insert([
         {
-          name,
-          email,
-          phone,
-          village,
-          service,
-          message
-        }
+          name: name,
+          email: email,
+          phone: phone,
+          village: village,
+          service: service,
+        },
       ]);
 
+    console.log("DATA:", data);
+    console.log("ERROR:", error);
+
     if (error) {
-      console.log(error);
-      setStatus("Submission failed. Please try again.");
-    } else {
-      setStatus("Thank you! Your request has been submitted.");
-      setName("");
-      setEmail("");
-      setPhone("");
-      setVillage("");
-      setService("");
-      setMessage("");
+      alert("Error: " + error.message);
+      return;
     }
 
-    setIsSubmitting(false);
+    alert("Thank You! Your Request Submitted Successfully");
+
+    setName("");
+    setEmail("");
+    setPhone("");
+    setVillage("");
+    setService("");
   }
 
   return (
-    <form className="contact-form" onSubmit={saveVisitor}>
-      <h2>Contact Us</h2>
+    <div className="contact-form" id="contact">
+      <form onSubmit={saveVisitor}>
+        <h2>Contact Us</h2>
 
-      <input
-        type="text"
-        placeholder="Enter Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-      />
+        <input
+          type="text"
+          placeholder="Enter Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
 
-      <input
-        type="email"
-        placeholder="Enter Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
+        <input
+          type="email"
+          placeholder="Enter Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-      <input
-        type="tel"
-        placeholder="Enter Phone Number"
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-        pattern="[0-9]{10}"
-        maxLength={10}
-        required
-      />
+        <input
+          type="text"
+          placeholder="Enter Phone Number"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          required
+        />
 
-      <input
-        type="text"
-        placeholder="Village Name"
-        value={village}
-        onChange={(e) => setVillage(e.target.value)}
-      />
+        <input
+          type="text"
+          placeholder="Village Name"
+          value={village}
+          onChange={(e) => setVillage(e.target.value)}
+        />
 
-      <select
-        value={service}
-        onChange={(e) => setService(e.target.value)}
-        required
-      >
-        <option value="">Select Service</option>
-        <option>Aadhar Card</option>
-        <option>PAN Card</option>
-        <option>Ayushman Bharat</option>
-        <option>Ration Card</option>
-        <option>Voter ID</option>
-        <option>E-Shram Card</option>
-        <option>Other</option>
-      </select>
+        <select
+          value={service}
+          onChange={(e) => setService(e.target.value)}
+          required
+        >
+          <option value="">Select Service</option>
+          <option value="Aadhar Card">Aadhar Card</option>
+          <option value="PAN Card">PAN Card</option>
+          <option value="Voter ID">Voter ID</option>
+          <option value="Labour Card">Labour Card</option>
+          <option value="PMAY">PMAY</option>
+          <option value="PF">PF</option>
+          <option value="ESIC">ESIC</option>
+          <option value="Insurance">Insurance</option>
+          <option value="PM Kisan">PM Kisan</option>
+          <option value="Ayushman Card">Ayushman Card</option>
+          <option value="Ration Card">Ration Card</option>
+        </select>
 
-      <textarea
-        placeholder="Describe the service you need (optional)"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-      />
-
-      {status && <p className="status-message">{status}</p>}
-
-      <button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "Submitting…" : "Submit"}
-      </button>
-    </form>
+        <button type="submit">
+          Submit
+        </button>
+      </form>
+    </div>
   );
 }
 
